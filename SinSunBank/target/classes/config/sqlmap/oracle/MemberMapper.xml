@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sun.dao.MemberDAO">
+
+    <insert id="save" parameterType="kr.co.sun.vo.MemberVO">
+        INSERT INTO member (mId, mName, mPassword, mPhone_num, mBirth, mAdress, mEmail, mRegdate, mNumber, mLoginAttempts, mLocked, mSignout)
+        VALUES (#{id}, #{name}, #{password}, #{phoneNum}, #{birth}, #{address}, #{email}, #{regDate}, #{number}, #{loginAttempts}, #{locked}, #{signout})
+    </insert>
+
+    <select id="findById" parameterType="String" resultType="kr.co.sun.vo.MemberVO">
+        SELECT * FROM member WHERE mId = #{id}
+    </select>
+
+    <select id="findByEmail" parameterType="String" resultType="kr.co.sun.vo.MemberVO">
+        SELECT * FROM member WHERE mEmail = #{email}
+    </select>
+    
+    <select id="findByPhoneAndEmail" parameterType="map" resultType="kr.co.sun.vo.MemberVO">
+        SELECT * FROM member WHERE mPhone_num = #{phoneNum} AND mEmail = #{email}
+    </select>
+    
+    <select id="findByIdAndEmail" parameterType="map" resultType="kr.co.sun.vo.MemberVO">
+        SELECT * FROM member WHERE mId = #{id} AND mEmail = #{email}
+    </select>
+
+    <update id="update" parameterType="kr.co.sun.vo.MemberVO">
+        UPDATE member SET
+            mName = #{name},
+            mPassword = #{password},
+            mPhone_num = #{phoneNum},
+            mBirth = #{birth},
+            mAdress = #{address},
+            mEmail = #{email},
+            mLoginAttempts = #{loginAttempts},
+            mLocked = #{locked},
+            mSignout = #{signout}
+        WHERE mId = #{id}
+    </update>
+
+    <select id="findAll" resultType="kr.co.sun.vo.MemberVO">
+        SELECT * FROM member
+    </select>
+
+</mapper>

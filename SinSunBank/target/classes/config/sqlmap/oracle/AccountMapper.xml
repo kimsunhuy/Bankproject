@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sun.dao.AccountDAO">
+
+      <insert id="save" parameterType="kr.co.sun.vo.AccountVO">
+        INSERT INTO account (acMember_id, acNumber, acName, acPassword, acRegdate, acType, acBalance)
+        VALUES (#{acMember_id}, #{acNumber}, #{acName}, #{acPassword}, #{acRegdate}, #{acType}, #{acBalance})
+    	</insert>
+
+	<select id="findAccountsByUserId" resultType="kr.co.sun.vo.AccountVO">
+        SELECT * FROM account WHERE acMember_id = #{userId}
+    </select>
+
+	 <select id="checkAccountNumberExists" resultType="boolean">
+        SELECT 1 FROM account WHERE acNumber = #{accountNumber}
+    </select>
+	
+    <select id="findByNumber" parameterType="String" resultType="kr.co.sun.vo.AccountVO">
+        SELECT * FROM account WHERE acNumber = #{number}
+    </select>
+
+    <select id="findByMemberId" parameterType="String" resultType="kr.co.sun.vo.AccountVO">
+        SELECT * FROM account WHERE acMember_id = #{memberId}
+    </select>
+
+	<update id="update" parameterType="kr.co.sun.vo.AccountVO">
+	    UPDATE account SET
+	        acName = #{name},
+	        acPassword = #{password},
+	        acRegdate = #{regdate},
+	        acType = #{type},
+	        acBalance = #{balance}
+	    WHERE acNumber = #{number}
+	</update>
+
+    <delete id="delete" parameterType="String">
+        DELETE FROM account WHERE acNumber = #{number}
+    </delete>
+    
+    <select id="getAccountByNumber" parameterType="string" resultType="kr.co.sun.vo.AccountVO">
+        SELECT * FROM account WHERE acNumber = #{accountNumber}
+    </select>
+
+    <update id="updateAccount" parameterType="kr.co.sun.vo.AccountVO">
+        UPDATE account
+        SET acBalance = #{acBalance}
+        WHERE acNumber = #{acNumber}
+    </update>
+    
+    
+</mapper>

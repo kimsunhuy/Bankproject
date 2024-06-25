@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sun.dao.InquiryDAO">
+
+    <insert id="save" parameterType="kr.co.sun.vo.InquiryVO">
+        INSERT INTO inquiry (title, content)
+        VALUES (#{title}, #{content})
+    </insert>
+
+    <select id="findById" parameterType="int" resultType="kr.co.sun.vo.InquiryVO">
+        SELECT * FROM inquiry WHERE id = #{id}
+    </select>
+
+    <update id="update" parameterType="kr.co.sun.vo.InquiryVO">
+        UPDATE inquiry SET title = #{title}, content = #{content} WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM inquiry WHERE id = #{id}
+    </delete>
+
+    <select id="findAll" resultType="kr.co.sun.vo.InquiryVO">
+        SELECT * FROM inquiry
+    </select>
+
+	<select id="findInquiriesByUserId" resultType="kr.co.sun.vo.InquiryVO">
+        SELECT * FROM inquiry WHERE userId = #{userId}
+    </select>
+
+</mapper>

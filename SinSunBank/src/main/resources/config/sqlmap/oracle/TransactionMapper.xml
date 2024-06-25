@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sun.dao.TransactionDAO">
+
+    <insert id="save" parameterType="kr.co.sun.vo.TransactionVO">
+        INSERT INTO transaction (tAccount_number, tName, tAmount, tDate, tType)
+        VALUES (#{accountNumber}, #{name}, #{amount}, #{date}, #{type})
+    </insert>
+
+    <select id="findById" parameterType="int" resultType="kr.co.sun.vo.TransactionVO">
+        SELECT * FROM transaction WHERE tId = #{id}
+    </select>
+
+    <update id="update" parameterType="kr.co.sun.vo.TransactionVO">
+        UPDATE transaction SET
+            tAccount_number = #{accountNumber},
+            tName = #{name},
+            tAmount = #{amount},
+            tDate = #{date},
+            tType = #{type}
+        WHERE tId = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM transaction WHERE tId = #{id}
+    </delete>
+
+    <select id="findByAccountNumber" parameterType="String" resultType="kr.co.sun.vo.TransactionVO">
+        SELECT * FROM transaction WHERE tAccount_number = #{accountNumber}
+    </select>
+
+    <select id="findAll" resultType="kr.co.sun.vo.TransactionVO">
+        SELECT * FROM transaction
+    </select>
+
+	 <select id="findTransactionsByUserId" resultType="kr.co.sun.vo.TransactionVO">
+        SELECT * FROM transaction WHERE tMember_id = #{userId}
+    </select>
+
+	<insert id="insertTransaction" parameterType="kr.co.sun.vo.TransactionVO">
+        INSERT INTO TRANSACTION (tId, tAccount_number, tType, tAmount, tDate, tName)
+        VALUES (#{tId}, #{tAccount_number}, #{tType}, #{tAmount}, #{tDate, jdbcType=TIMESTAMP}, #{tName})
+    </insert>
+
+    <select id="getTransactionsByAccount" parameterType="string" resultType="kr.co.sun.vo.TransactionVO">
+        SELECT * FROM TRANSACTION WHERE tAccount_number  = #{accountNumber}
+    </select>
+
+
+</mapper>

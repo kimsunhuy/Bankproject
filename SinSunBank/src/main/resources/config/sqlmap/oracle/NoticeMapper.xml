@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sun.dao.NoticeDAO">
+
+    <insert id="save" parameterType="kr.co.sun.vo.NoticeVO">
+        INSERT INTO notice (nType, nTitle, nWriter, nContent, nViewcnt, nRegdate)
+        VALUES (#{type}, #{title}, #{writer}, #{content}, #{viewcnt}, #{regdate})
+    </insert>
+
+    <select id="findById" parameterType="int" resultType="kr.co.sun.vo.NoticeVO">
+        SELECT * FROM notice WHERE nNumber = #{id}
+    </select>
+
+    <update id="update" parameterType="kr.co.sun.vo.NoticeVO">
+        UPDATE notice SET
+            nType = #{type},
+            nTitle = #{title},
+            nWriter = #{writer},
+            nContent = #{content},
+            nViewcnt = #{viewcnt},
+            nRegdate = #{regdate}
+        WHERE nNumber = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM notice WHERE nNumber = #{id}
+    </delete>
+
+    <select id="findAll" resultType="kr.co.sun.vo.NoticeVO">
+        SELECT * FROM notice
+    </select>
+
+	   <select id="findNoticesByUserId" resultType="kr.co.sun.vo.NoticeVO">
+        SELECT * FROM notice WHERE nMember_id = #{userId}
+    </select>
+
+</mapper>
