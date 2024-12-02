@@ -11,6 +11,7 @@
     <form action="${pageContext.request.contextPath}/accounts/createAccountStep2" method="post">
         <div>
             <h3>Privacy Policy Agreement</h3>
+            <h3>정책에 동의하십시오.</h3>
             <label><input type="checkbox" name="privacyAgreement" value="agree"> I agree to the privacy policy</label>
         </div>
         <div>
